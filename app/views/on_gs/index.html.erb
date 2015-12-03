@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ongs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Mail</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ongs.each do |ong| %>
+      <tr>
+        <td><%= ong.name %></td>
+        <td><%= ong.description %></td>
+        <td><%= ong.image %></td>
+        <td><%= ong.mail %></td>
+        <td><%= ong.user %></td>
+        <td><%= link_to 'Show', ong %></td>
+        <td><%= link_to 'Edit', edit_ong_path(ong) %></td>
+        <td><%= link_to 'Destroy', ong, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ong', new_ong_path %>
