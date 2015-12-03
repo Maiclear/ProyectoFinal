@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   has_many :ong_comments, through: :comments, source: :commentable, source_type: 'Ong'
   has_many :event_comments, through: :comments, source: :commentable, source_type: 'Event'
 
+  has_many :favorites
+  has_many :ong_favorites, through: :favorites, source: :favoritable, source_type: 'Ong'
+  has_many :event_favorites, through: :favorites, source: :favoritable, source_type: 'Event'
 
   has_many :participations
   has_many :events, through: :participations

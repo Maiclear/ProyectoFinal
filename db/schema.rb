@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203220056) do
+ActiveRecord::Schema.define(version: 20151203225309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -27,6 +33,16 @@ ActiveRecord::Schema.define(version: 20151203220056) do
 
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "event_tags", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "event_tags", ["event_id"], name: "index_event_tags_on_event_id", using: :btree
+  add_index "event_tags", ["tag_id"], name: "index_event_tags_on_tag_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
@@ -42,6 +58,27 @@ ActiveRecord::Schema.define(version: 20151203220056) do
   end
 
   add_index "events", ["ong_id"], name: "index_events_on_ong_id", using: :btree
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "favoritable_id"
+    t.string   "favoritable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "favorites", ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable_type_and_favoritable_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+
+  create_table "ong_categories", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "ong_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "ong_categories", ["category_id"], name: "index_ong_categories_on_category_id", using: :btree
+  add_index "ong_categories", ["ong_id"], name: "index_ong_categories_on_ong_id", using: :btree
 
   create_table "ongs", force: :cascade do |t|
     t.string   "name"
@@ -74,6 +111,12 @@ ActiveRecord::Schema.define(version: 20151203220056) do
 
   add_index "photos", ["event_id"], name: "index_photos_on_event_id", using: :btree
 
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -99,7 +142,12 @@ ActiveRecord::Schema.define(version: 20151203220056) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "comments", "users"
+  add_foreign_key "event_tags", "events"
+  add_foreign_key "event_tags", "tags"
   add_foreign_key "events", "ongs"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "ong_categories", "categories"
+  add_foreign_key "ong_categories", "ongs"
   add_foreign_key "ongs", "users"
   add_foreign_key "participations", "events"
   add_foreign_key "participations", "users"
