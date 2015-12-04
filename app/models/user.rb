@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  mount_uploader :avatar, AvatarUploader
+
   before_save :default_role
 
   has_many :ongs
@@ -22,7 +24,7 @@ class User < ActiveRecord::Base
   validates :lastname, presence:true
   validates :rut, presence:true, uniqueness: true
   validates :address, presence:true
-
+  validate :validate_username
 
 
   enum role: [:admin, :ong, :basic, :guest]
