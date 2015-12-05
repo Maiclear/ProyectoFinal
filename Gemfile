@@ -16,7 +16,7 @@ gem 'entypo-rails'
 gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'sass-rails'
 gem 'mini_magick'
-gem 'carrierwave'
+
 
 gem 'underscore-rails'
 
@@ -37,6 +37,7 @@ gem 'delayed_job_active_record'
 
 gem 'dotenv-rails'
 
+gem 'carrierwave'
 group :development, :test do
   gem 'byebug'
   gem 'pry-rails'

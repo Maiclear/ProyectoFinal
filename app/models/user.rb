@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates :lastname, presence:true
   validates :rut, presence:true, uniqueness: true
   validates :address, presence:true
-  validate :validate_username
+
 
 
   enum role: [:admin, :ong, :basic, :guest]
