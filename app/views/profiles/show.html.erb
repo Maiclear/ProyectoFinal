@@ -1,2 +1,30 @@
-<h1>Profiles#show</h1>
-<p>Find me in app/views/profiles/show.html.erb</p>
+
+<p>
+  <%= image_tag @user.avatar, width: '200px' %>
+</p>
+<p>
+  <strong>Nombre:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @user.lastname %>
+</p>
+
+
+
+<p>
+  <strong>Mail:</strong>
+  <%= @user.email %>
+</p>
+
+<br>
+<%= link_to "Editar perfil", edit_user_registration_path %>
+<br>
+<%= link_to "Back", :back %>
+<br>
+<%= link_to 'CREA UNA ONG', new_ong_path %>
+<br>
+<%= link_to 'MISS *ONGs*', ongs_path %>
+
