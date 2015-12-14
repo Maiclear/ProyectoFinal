@@ -12,7 +12,7 @@
 
 <p>
   <strong>Date:</strong>
-  <%= @event.date %>
+  <%= @event.day %>
 </p>
 
 <p>
@@ -20,18 +20,18 @@
   <%= @event.address %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Longitude:</strong>
-  <%= @event.longitude %>
+  <%#= @event.longitude %>
 </p>
 
 <p>
   <strong>Latitude:</strong>
-  <%= @event.latitude %>
-</p>
+  <%#= @event.latitude %>
+</p> -->
 
 <p>
-  <strong>Spot:</strong>
+  <strong>Cupos:</strong>
   <%= @event.spot %>
 </p>
 
@@ -40,5 +40,5 @@
   <%= @event.ong %>
 </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Edit', edit_ong_event_path(@ong,@event) %> |
+<%= link_to 'Back', events_path(@event.ong,@event) %>

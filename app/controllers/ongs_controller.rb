@@ -1,15 +1,16 @@
-class OnGsController < ApplicationController
+class OngsController < ApplicationController
   before_action :set_ong, only: [:show, :edit, :update, :destroy]
 
   # GET /ongs
   # GET /ongs.json
   def index
-    @ongs = Ong.all
+      @ongs = Ong.all
   end
 
   # GET /ongs/1
   # GET /ongs/1.json
   def show
+
   end
 
   # GET /ongs/new
@@ -25,7 +26,7 @@ class OnGsController < ApplicationController
   # POST /ongs.json
   def create
     @ong = Ong.new(ong_params)
-
+    @ong.user = current_user if user_signed_in?
     respond_to do |format|
       if @ong.save
         format.html { redirect_to @ong, notice: 'Ong was successfully created.' }
@@ -69,6 +70,6 @@ class OnGsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ong_params
-      params.require(:ong).permit(:name, :description, :image, :mail, :user_id)
+      params.require(:ong).permit(:name, :description, :image, :mail, :user_id, :remove_image, :image_cache, :remote_image_url)
     end
 end

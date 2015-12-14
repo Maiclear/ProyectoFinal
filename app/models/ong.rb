@@ -16,6 +16,10 @@ class Ong < ActiveRecord::Base
 
   validates :name, presence:true, uniqueness: true
   validates :description, presence:true
-  validates :name, presence:true
+  validates :mail, presence:true
+
+  def to_s
+    "#{self.name}"
+  end
 
 end

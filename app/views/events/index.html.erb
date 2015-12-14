@@ -22,15 +22,15 @@
       <tr>
         <td><%= event.name %></td>
         <td><%= event.description %></td>
-        <td><%= event.date %></td>
+        <td><%= event.day %></td>
         <td><%= event.address %></td>
         <td><%= event.longitude %></td>
         <td><%= event.latitude %></td>
         <td><%= event.spot %></td>
         <td><%= event.ong %></td>
         <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- <td><%#= link_to 'Edit', edit_ong_event_path(@ong, event) %></td> -->
+        <td><%= link_to 'Destroy', ong_event_path(event.ong, event), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +38,5 @@
 
 <br>
 
-<%= link_to 'New Event', new_event_path %>
+
+ <%#= link_to 'New Event', new_event_path %>

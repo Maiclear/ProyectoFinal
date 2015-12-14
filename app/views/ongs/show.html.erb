@@ -12,7 +12,7 @@
 
 <p>
   <strong>Image:</strong>
-  <%= image_tag @ong.image %>
+  <%= image_tag @ong.image, width: '200px' %>
 </p>
 
 <p>
@@ -25,5 +25,13 @@
   <%= @ong.user %>
 </p>
 
+<br>
+
+<%= link_to 'CREA UN EVENTO', new_ong_event_path(@ong) %>
+<br>
+<br>
+<%= link_to 'MISS *EVENTS*', ong_events_path(@ong) %>
+<br>
 <%= link_to 'Edit', edit_ong_path(@ong) %> |
 <%= link_to 'Back', ongs_path %>
+

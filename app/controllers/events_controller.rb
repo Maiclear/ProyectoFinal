@@ -4,28 +4,36 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    if params[:ong_id].present?
+      ong = Ong.find(params[:ong_id])
+      @events = ong.events
+    else
+      @events = Event.all
+    end
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    @ong = @event.ong
   end
 
   # GET /events/new
   def new
     @event = Event.new
+    @ong = Ong.find(params[:ong_id])
   end
 
   # GET /events/1/edit
   def edit
+    @ong = @event.ong
   end
 
   # POST /events
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
+    @event.ong = Ong.find(params[:ong_id])
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -56,7 +64,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +77,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :date, :address, :longitude, :latitude, :spot, :ong_id)
+      params.require(:event).permit(:name, :description, :day, :address, :longitude, :latitude, :spot, :ong_id)
     end
 end

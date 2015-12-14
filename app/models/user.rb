@@ -27,14 +27,14 @@ class User < ActiveRecord::Base
 
 
 
-  enum role: [:admin, :ong, :basic, :guest]
+  enum role: [:admin, :owner, :basic, :guest]
 
   def default_role
     self.role ||= 2
   end
 
   def to_s
-    "#{self.name} #{self.last_name}"
+    "#{self.name} #{self.lastname}"
   end
 
 

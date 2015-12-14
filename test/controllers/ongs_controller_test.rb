@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class OnGsControllerTest < ActionController::TestCase
+class OngsControllerTest < ActionController::TestCase
   setup do
     @ong = ongs(:one)
   end
