@@ -23,8 +23,10 @@
 <%= link_to "Editar perfil", edit_user_registration_path %>
 <br>
 <%= link_to "Back", :back %>
-<br>
-<%= link_to 'CREA UNA ONG', new_ong_path %>
-<br>
-<%= link_to 'MISS *ONGs*', ongs_path %>
 
+<% if can? :create, Ong %>
+  <br>
+  <%= link_to 'CREA UNA ONG', new_ong_path %>
+  <br>
+  <%= link_to 'MISS *ONGs*', ongs_path %>
+<% end %>

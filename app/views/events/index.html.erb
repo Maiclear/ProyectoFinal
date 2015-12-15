@@ -9,8 +9,6 @@
       <th>Description</th>
       <th>Date</th>
       <th>Address</th>
-      <th>Longitude</th>
-      <th>Latitude</th>
       <th>Spot</th>
       <th>Ong</th>
       <th colspan="3"></th>
@@ -24,13 +22,15 @@
         <td><%= event.description %></td>
         <td><%= event.day %></td>
         <td><%= event.address %></td>
-        <td><%= event.longitude %></td>
-        <td><%= event.latitude %></td>
         <td><%= event.spot %></td>
-        <td><%= event.ong %></td>
+        <td><%= link_to "#{event.ong}", ong_path(event.ong) %></td>
         <td><%= link_to 'Show', event %></td>
-        <!-- <td><%#= link_to 'Edit', edit_ong_event_path(@ong, event) %></td> -->
-        <td><%= link_to 'Destroy', ong_event_path(event.ong, event), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :update, Event %>
+          <td><%= link_to 'Edit', edit_ong_event_path(event.ong, event) %></td>
+        <% end %>
+        <% if can? :destroy, Event %>
+          <td><%= link_to 'Destroy', ong_event_path(event.ong, event), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

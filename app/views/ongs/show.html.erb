@@ -26,12 +26,15 @@
 </p>
 
 <br>
-
-<%= link_to 'CREA UN EVENTO', new_ong_event_path(@ong) %>
-<br>
-<br>
-<%= link_to 'MISS *EVENTS*', ong_events_path(@ong) %>
-<br>
-<%= link_to 'Edit', edit_ong_path(@ong) %> |
+<% if can? :create, Event %>
+  <%= link_to 'CREA UN EVENTO', new_ong_event_path(@ong) %>
+  <br>
+  <br>
+  <%= link_to 'MISS *EVENTS*', ong_events_path(@ong) %>
+  <br>
+<% end %>
+<% if can? :update, Ong %>
+  <%= link_to 'Edit', edit_ong_path(@ong) %>
+<% end %>
 <%= link_to 'Back', ongs_path %>
 

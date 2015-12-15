@@ -23,8 +23,12 @@
         <td><%= ong.mail %></td>
         <td><%= ong.user %></td>
         <td><%= link_to 'Show', ong %></td>
-        <td><%= link_to 'Edit', edit_ong_path(ong) %></td>
-        <td><%= link_to 'Destroy', ong, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :update, Ong %>
+          <td><%= link_to 'Edit', edit_ong_path(ong) %></td>
+        <% end %>
+        <% if can? :destroy, Ong %>
+          <td><%= link_to 'Destroy', ong, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
