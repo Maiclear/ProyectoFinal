@@ -3,17 +3,17 @@ class User < ActiveRecord::Base
 
   before_save :default_role
 
-  has_many :ongs
+  has_many :ongs, dependent: :destroy
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :ong_comments, through: :comments, source: :commentable, source_type: 'Ong'
   has_many :event_comments, through: :comments, source: :commentable, source_type: 'Event'
 
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :ong_favorites, through: :favorites, source: :favoritable, source_type: 'Ong'
   has_many :event_favorites, through: :favorites, source: :favoritable, source_type: 'Event'
 
-  has_many :participations
+  has_many :participations, dependent: :destroy
   has_many :events, through: :participations
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -5,9 +5,9 @@
 <table>
   <thead>
     <tr>
+      <th>Image</th>
       <th>Name</th>
       <th>Description</th>
-      <th>Image</th>
       <th>Mail</th>
       <th>User</th>
       <th colspan="3"></th>
@@ -17,9 +17,9 @@
   <tbody>
     <% @ongs.each do |ong| %>
       <tr>
+        <td><%= image_tag ong.image, width: '200px' %></td>
         <td><%= ong.name %></td>
         <td><%= ong.description %></td>
-        <td><%= ong.image %></td>
         <td><%= ong.mail %></td>
         <td><%= ong.user %></td>
         <td><%= link_to 'Show', ong %></td>

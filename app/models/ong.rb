@@ -3,12 +3,12 @@ class Ong < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :events
+  has_many :events, dependent: :destroy
 
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
   has_many :user_comments, through: :comments, source: :user
 
-  has_many :favorites, as: :favoritable
+  has_many :favorites, as: :favoritable, dependent: :destroy
   has_many :user_favorites, through: :favorites, source: :user
 
   has_many :ong_categories

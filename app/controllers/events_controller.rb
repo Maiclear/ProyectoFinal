@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :ong
+  load_and_authorize_resource :event, through: :ong, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
@@ -17,6 +18,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @ong = @event.ong
+    @comments = @event.comments.reverse
   end
 
   # GET /events/new
@@ -67,6 +69,19 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def create_comment
+    @comment = @post.likes.build(user: current_user)
+
+    if @post.liked_by? current_user
+      @post.remove_like current_user
+      redirect_to @post, notice: 'Tu like a sido eliminado :('
+    elsif @post.save
+      redirect_to @post, notice: 'Gracias por tu like :D'
+    else
+      redirect_to @post, notice: 'Tu like no se ha guardado :('
     end
   end
 

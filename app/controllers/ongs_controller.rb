@@ -10,7 +10,7 @@ class OngsController < ApplicationController
   # GET /ongs/1
   # GET /ongs/1.json
   def show
-
+    @comments = @ong.comments.reverse
   end
 
   # GET /ongs/new
@@ -58,6 +58,25 @@ class OngsController < ApplicationController
     @ong.destroy
     respond_to do |format|
       format.html { redirect_to ongs_url, notice: 'Ong was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def create_comment
+    @comment = @ong.comments.build(user: current_user, content: params[:content])
+
+    if @comment.save
+      redirect_to @ong, notice: 'Gracias por tu comentario :D'
+    else
+      redirect_to @ong, notice: 'Tu comentario no se ha guardado :('
+    end
+  end
+
+  def delete_comment
+    comment = Comment.find(params[:comment_id])
+    comment.destroy
+    respond_to do |format|
+      format.html { redirect_to @ong, notice: 'Comment successfully destroyed.' }
       format.json { head :no_content }
     end
   end

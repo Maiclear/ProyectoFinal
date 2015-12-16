@@ -25,10 +25,10 @@
         <td><%= event.spot %></td>
         <td><%= link_to "#{event.ong}", ong_path(event.ong) %></td>
         <td><%= link_to 'Show', event %></td>
-        <% if can? :update, Event %>
+        <% if can? :update, event.ong => Event %>
           <td><%= link_to 'Edit', edit_ong_event_path(event.ong, event) %></td>
         <% end %>
-        <% if can? :destroy, Event %>
+        <% if can? :destroy, event.ong => Event %>
           <td><%= link_to 'Destroy', ong_event_path(event.ong, event), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>

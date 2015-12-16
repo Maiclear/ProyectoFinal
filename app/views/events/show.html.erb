@@ -39,6 +39,29 @@
   <strong>Ong:</strong>
   <%= @event.ong %>
 </p>
+
+<p>
+<% if can? :create, Comment %>
+  <%= form_for [@event, Comment.new] do |f| %>
+    <p> <h2>  <%= f.label :content, "Deja tu comentario:"  %></h2></p>
+    <%= f.text_area :content  %>
+    <p><%= f.submit "Enviar"   %></p>
+  <% end %>
+<% end %>
+
+<h2>Comentarios:</h2>
+
+<% @comments.each do |c| %>
+  <hr>
+  <p><small><%= time_ago_in_words c.created_at  %></small></p>
+  <p><%= c.content  %></p>
+  <p><small>Creado por: <%= c.user %></small></p>
+  <hr>
+<% end %>
+</p>
+
+<br>
+<br>
 <% if can? :update, Event %>
   <%= link_to 'Edit', edit_ong_event_path(@ong,@event) %>
 <% end %>
