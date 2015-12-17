@@ -1,14 +1,54 @@
-<div class='navbar navbarprof'>
-	<% unless user_signed_in? %>
-		<%= link_to 'Ingresar', new_user_session_path %>
-		<%= link_to 'Registrar', new_user_registration_path %>
-	<% else %>
-		<%= link_to current_user.name, profiles_show_path %> <small><%= current_user.role %></small>
-		<%= link_to 'Salir', destroy_user_session_path, method: :delete, data: { confirm: "Seguro que desea salir?" } %>
-	<% end %>
-</div>
-<div class='navbar'>
-	<%= link_to 'Home', root_path %>
-	<%= link_to 'Ongs', ongs_path %>
-	<%= link_to 'Events', events_path %>
-</div>
+<nav class="navbar navbar-light navbar-fixed-top ">
+  <a class="navbar-brand" href="/">MaiClear's</a>
+	  <ul class="nav navbar-nav">
+
+	    <li class="nav-item active">
+	      <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+	    </li>
+
+	    <li class="nav-item">
+	      <%= link_to 'Ongs', ongs_path, class: 'nav-link' %>
+	    </li>
+
+	    <li class="nav-item">
+	      <%= link_to 'Events', events_path, class: 'nav-link'  %>
+	    </li>
+	  </ul>
+
+   <ul class="nav navbar-nav pull-right">
+
+	    <% unless user_signed_in? %>
+
+		    <li class="nav-item ">
+		      <%= link_to  new_user_session_path, class: 'nav-link active' do %>
+		      	Ingresar
+		      	<span class="icon-login" aria-hidden="true"></span>
+		      <% end %>
+		    </li>
+
+		    <li class="nav-item ">
+		      <%= link_to new_user_registration_path,  class: 'nav-link' do %>
+		      	Registrarse
+		      	<span class="icon-add-user" aria-hidden="true"></span>
+		      <% end %>
+		    </li>
+	    <% else %>
+
+	    	<li class="nav-item ">
+		      <%= link_to  profiles_show_path, class: 'nav-link active' do %>
+		      	  <span class="icon-user" aria-hidden="true"></span>
+			      <%= current_user.name %>
+			      <small><%= current_user.role %></small>
+
+			  <% end %>
+		    </li>
+
+		    <li class="nav-item ">
+			    <%= link_to destroy_user_session_path, method: :delete, data: { confirm: "Seguro que desea salir?" }, class: 'nav-link' do %>
+			    	Salir
+			    	<span class="icon-logout" aria-hidden="true"></span>
+			    <% end %>
+
+		<% end %>
+   </ul>
+</nav>
