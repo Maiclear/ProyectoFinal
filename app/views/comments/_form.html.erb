@@ -1,0 +1,6 @@
+<%= form_for [commentable, Comment.new] do |f| %>
+	<p> <h2>  <%= f.label :content, "Deja tu comentario:"  %></h2></p>
+	<%= f.text_area :content %>
+	<p><%= submit_tag "Enviar"   %></p>
+<% end %>
+

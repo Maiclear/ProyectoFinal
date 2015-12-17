@@ -1,0 +1,39 @@
+<h3>Mis Ongs</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Mail</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ongs.each do |ong| %>
+      <tr>
+        <td>
+        <%= link_to ong do %>
+          <%= image_tag ong.image.thumb, width: '50px' %>
+        <% end %>
+        </td>
+        <td><%= ong.name %></td>
+        <td><%= ong.description %></td>
+        <td><%= ong.mail %></td>
+        <td><%= ong.user %></td>
+        <td><%= link_to 'Show', ong %></td>
+        <% if can? :update, Ong %>
+          <td><%= link_to 'Edit', edit_ong_path(ong) %></td>
+        <% end %>
+        <% if can? :destroy, Ong %>
+          <td><%= link_to 'Destroy', ong, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

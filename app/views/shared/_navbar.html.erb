@@ -1,4 +1,4 @@
-<p>
+<div class='navbar navbarprof'>
 	<% unless user_signed_in? %>
 		<%= link_to 'Ingresar', new_user_session_path %>
 		<%= link_to 'Registrar', new_user_registration_path %>
@@ -6,4 +6,9 @@
 		<%= link_to current_user.name, profiles_show_path %> <small><%= current_user.role %></small>
 		<%= link_to 'Salir', destroy_user_session_path, method: :delete, data: { confirm: "Seguro que desea salir?" } %>
 	<% end %>
-</p>
+</div>
+<div class='navbar'>
+	<%= link_to 'Home', root_path %>
+	<%= link_to 'Ongs', ongs_path %>
+	<%= link_to 'Events', events_path %>
+</div>

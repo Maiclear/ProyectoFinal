@@ -1,4 +1,4 @@
-
+<h2>EVENTO <%= @event.name %> </h2>
 
 <p>
   <strong>Name:</strong>
@@ -40,29 +40,15 @@
   <%= @event.ong %>
 </p>
 
-<p>
 <% if can? :create, Comment %>
-  <%= form_for [@event, Comment.new] do |f| %>
-    <p> <h2>  <%= f.label :content, "Deja tu comentario:"  %></h2></p>
-    <%= f.text_area :content  %>
-    <p><%= f.submit "Enviar"   %></p>
-  <% end %>
+  <%= render partial: "comments/form" , locals: {commentable: @event} %>
 <% end %>
 
-<h2>Comentarios:</h2>
-
-<% @comments.each do |c| %>
-  <hr>
-  <p><small><%= time_ago_in_words c.created_at  %></small></p>
-  <p><%= c.content  %></p>
-  <p><small>Creado por: <%= c.user %></small></p>
-  <hr>
-<% end %>
-</p>
+<%= render partial: "comments/comments" , locals: {commentable: @event} %>
 
 <br>
 <br>
 <% if can? :update, Event %>
-  <%= link_to 'Edit', edit_ong_event_path(@ong,@event) %>
+  <%= link_to 'Edit', edit_ong_event_path(@ong ,@event) %>
 <% end %>
-<%= link_to 'Back', events_path(@event.ong,@event) %>
+<%= link_to 'Back', events_path(@ong, @event) %>

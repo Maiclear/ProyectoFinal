@@ -28,26 +28,9 @@
 <br>
 
 <% if can? :create, Comment %>
-  <%= form_tag comment_ong_path do %>
-    <p> <h2>  <%= label_tag :content, "Deja tu comentario:"  %></h2></p>
-    <%= text_area_tag :content  %>
-    <p><%= submit_tag "Enviar"   %></p>
-  <% end %>
+  <%= render partial: "comments/form" , locals: {commentable: @ong} %>
 <% end %>
-
-<h2>Comentarios:</h2>
-
-<% @comments.each do |c| %>
-  <hr>
-  <p><small><%= time_ago_in_words c.created_at  %></small></p>
-  <p><%= c.content  %></p>
-  <p><small>Creado por: <%= c.user %></small></p>
-  <% if can? :delete_comment, Ong %>
-    <p><small><%= link_to 'Borrar Comentario', delete_comment_ong_path(@ong, c), method: :delete %></small></p>
-    <hr>
-   <% end %>
-<% end %>
-</p>
+<%= render partial: "comments/comments" , locals: {commentable: @ong} %>
 
 <br>
 <% if can? :create, Event %>

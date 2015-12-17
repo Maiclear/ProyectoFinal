@@ -62,24 +62,24 @@ class OngsController < ApplicationController
     end
   end
 
-  def create_comment
-    @comment = @ong.comments.build(user: current_user, content: params[:content])
+  # def create_comment
+  #   @comment = @ong.comments.build(user: current_user, content: params[:content])
 
-    if @comment.save
-      redirect_to @ong, notice: 'Gracias por tu comentario :D'
-    else
-      redirect_to @ong, notice: 'Tu comentario no se ha guardado :('
-    end
-  end
+  #   if @comment.save
+  #     redirect_to @ong, notice: 'Gracias por tu comentario :D'
+  #   else
+  #     redirect_to @ong, notice: 'Tu comentario no se ha guardado :('
+  #   end
+  # end
 
-  def delete_comment
-    comment = Comment.find(params[:comment_id])
-    comment.destroy
-    respond_to do |format|
-      format.html { redirect_to @ong, notice: 'Comment successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def delete_comment
+  #   comment = Comment.find(params[:comment_id])
+  #   comment.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to @ong, notice: 'Comment successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -72,18 +72,18 @@ class EventsController < ApplicationController
     end
   end
 
-  def create_comment
-    @comment = @post.likes.build(user: current_user)
+  # def create_comment
+  #   @comment = @post.likes.build(user: current_user)
 
-    if @post.liked_by? current_user
-      @post.remove_like current_user
-      redirect_to @post, notice: 'Tu like a sido eliminado :('
-    elsif @post.save
-      redirect_to @post, notice: 'Gracias por tu like :D'
-    else
-      redirect_to @post, notice: 'Tu like no se ha guardado :('
-    end
-  end
+  #   if @post.liked_by? current_user
+  #     @post.remove_like current_user
+  #     redirect_to @post, notice: 'Tu like a sido eliminado :('
+  #   elsif @post.save
+  #     redirect_to @post, notice: 'Gracias por tu like :D'
+  #   else
+  #     redirect_to @post, notice: 'Tu like no se ha guardado :('
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

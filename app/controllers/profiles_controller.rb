@@ -3,5 +3,6 @@ class ProfilesController < ApplicationController
 
   def show
     @user = current_user
+    @ongs = @user.ongs
   end
 end
