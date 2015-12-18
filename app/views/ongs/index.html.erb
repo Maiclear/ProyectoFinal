@@ -1,8 +1,8 @@
 
 
-<h1>Listing Ongs</h1>
+<h1>Todas las Ongs:</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Image</th>
@@ -17,7 +17,10 @@
   <tbody>
     <% @ongs.each do |ong| %>
       <tr>
-        <td><%= image_tag ong.image, width: '200px' %></td>
+        <td>
+          <%= link_to ong do %>
+            <%= image_tag ong.image, width: '200px' , class: 'img-circle'%>
+            <% end %></td>
         <td><%= ong.name %></td>
         <td><%= ong.description %></td>
         <td><%= ong.mail %></td>

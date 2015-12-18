@@ -8,12 +8,18 @@
 </head>
 <body>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 
-<%= render partial: 'shared/navbar' %>
+	<div class="js-flash">
+		<%= flash_messages %>
+	</div>
 
-<%= yield %>
+	<div class="container">
+		<%= render partial: 'shared/navbar' %>
+	</div>
+
+	<div class="body-content container">
+		<%= yield %>
+	</div>
 
 </body>
 </html>
