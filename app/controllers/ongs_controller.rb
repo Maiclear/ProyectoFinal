@@ -11,6 +11,7 @@ class OngsController < ApplicationController
   # GET /ongs/1.json
   def show
     @comments = @ong.comments.reverse
+    @events = @ong.events
   end
 
   # GET /ongs/new

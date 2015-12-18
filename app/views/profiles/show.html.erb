@@ -15,13 +15,17 @@
   <%= @user.email %>
 </p>
 <br>
-<%= render 'ong' %>
+
+<% if can? :create, Ong %>
+	<%= render 'ong' %>
+  <%= link_to 'CREA UNA ONG', new_ong_path %>
+<% end %>
+<br>
 <br>
 <%= link_to "Editar perfil", edit_user_registration_path %>
 <br>
 <%= link_to "Back", :back %>
 
-<% if can? :create, Ong %>
-  <br>
-  <%= link_to 'CREA UNA ONG', new_ong_path %>
-<% end %>
+
+<br>
+<br>

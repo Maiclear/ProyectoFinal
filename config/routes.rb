@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'pages/index'
+
+  get 'tags/:tag', to: 'events#index', as: :tag
+
   get 'profiles/show'
 
   devise_for :users, :controllers => { :registrations => :registrations }
@@ -15,5 +19,7 @@ Rails.application.routes.draw do
     resources :events
   end
 
-  root 'events#index'
+  # resources :tags, only: [:index, :show]
+
+  root 'pages#index'
 end

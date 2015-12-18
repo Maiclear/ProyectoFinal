@@ -1,4 +1,17 @@
+<div class="btn-group pull-md-right">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    ONGS:
+  </button>
 
+    <ul class="dropdown-menu" role="menu">
+      <% @ongs.each do |ong| %>
+      <li><%= link_to "#{ong.name}",ong, class: 'dropdown-item' %></li>
+      <% end %>
+    </ul>
+
+    </div>
+<br>
+<br>
 
 <h1>Todas las Ongs:</h1>
 
@@ -19,9 +32,9 @@
       <tr>
         <td>
           <%= link_to ong do %>
-            <%= image_tag ong.image, width: '200px' , class: 'img-circle'%>
+            <%= image_tag ong.image, width: '100px' , class: 'img-circle'%>
             <% end %></td>
-        <td><%= ong.name %></td>
+        <td><%= link_to "#{ong.name}", ong %></td>
         <td><%= ong.description %></td>
         <td><%= ong.mail %></td>
         <td><%= ong.user %></td>

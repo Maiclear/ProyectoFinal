@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  acts_as_tagger
   mount_uploader :avatar, AvatarUploader
 
   before_save :default_role

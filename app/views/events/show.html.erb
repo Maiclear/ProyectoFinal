@@ -40,6 +40,13 @@
   <%= @event.ong %>
 </p>
 
+<p>
+  Tags:
+  <%= raw @event.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+</p>
+
+
+
 <% if can? :create, Comment %>
   <%= render partial: "comments/form" , locals: {commentable: @event} %>
 <% end %>
@@ -52,3 +59,6 @@
   <%= link_to 'Edit', edit_ong_event_path(@ong ,@event) %>
 <% end %>
 <%= link_to 'Back', events_path(@ong, @event) %>
+<br>
+<br>
+

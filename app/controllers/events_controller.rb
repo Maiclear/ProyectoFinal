@@ -9,6 +9,8 @@ class EventsController < ApplicationController
     if params[:ong_id].present?
       ong = Ong.find(params[:ong_id])
       @events = ong.events
+    elsif params[:tag].present?
+      @events = Event.tagged_with(params[:tag])
     else
       @events = Event.all
     end
@@ -19,6 +21,7 @@ class EventsController < ApplicationController
   def show
     @ong = @event.ong
     @comments = @event.comments.reverse
+    @tags = @event.tags
   end
 
   # GET /events/new
@@ -93,6 +96,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :day, :address, :longitude, :latitude, :spot, :ong_id)
+      params.require(:event).permit(:name, :description, :day, :address, :longitude, :latitude, :spot, :ong_id, :tag_list)
     end
 end

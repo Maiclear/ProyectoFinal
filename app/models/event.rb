@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  acts_as_taggable_on :tags
 
   belongs_to :ong
 
@@ -13,8 +14,8 @@ class Event < ActiveRecord::Base
   has_many :participations, dependent: :destroy
   has_many :users, through: :participations
 
-  has_many :event_tags
-  has_many :tags, through: :event_tags
+  # has_many :event_tags
+  # has_many :tags, through: :event_tags
 
 
   validates :name, presence:true

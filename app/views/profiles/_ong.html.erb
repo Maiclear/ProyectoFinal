@@ -1,6 +1,6 @@
 <h3>Mis Ongs</h3>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Image</th>
@@ -20,7 +20,7 @@
           <%= image_tag ong.image.thumb, width: '50px' %>
         <% end %>
         </td>
-        <td><%= ong.name %></td>
+        <td><%= link_to "#{ong.name}", ong  %></td>
         <td><%= ong.description %></td>
         <td><%= ong.mail %></td>
         <td><%= ong.user %></td>
@@ -36,4 +36,3 @@
   </tbody>
 </table>
 
-<br>

@@ -1,18 +1,16 @@
 
+<p>
+  <%= image_tag @ong.image, width: '150px'%>
+</p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Nombre:</strong>
   <%= @ong.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Descripción:</strong>
   <%= @ong.description %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @ong.image, width: '200px'%>
 </p>
 
 <p>
@@ -24,24 +22,23 @@
   <strong>User:</strong>
   <%= @ong.user %>
 </p>
-
 <br>
-
+<%= render 'event' %>
+<br>
+<% if can? :create, Event %>
+  <%= link_to 'CREA UN EVENTO', new_ong_event_path(@ong) %>
+  <br>
 <% if can? :create, Comment %>
   <%= render partial: "comments/form" , locals: {commentable: @ong} %>
 <% end %>
 <%= render partial: "comments/comments" , locals: {commentable: @ong} %>
 
 <br>
-<% if can? :create, Event %>
-  <%= link_to 'CREA UN EVENTO', new_ong_event_path(@ong) %>
-  <br>
-  <br>
-  <%= link_to 'MISS *EVENTS*', ong_events_path(@ong) %>
-  <br>
+
 <% end %>
 <% if can? :update, Ong %>
   <%= link_to 'Edit', edit_ong_path(@ong) %>
 <% end %>
 <%= link_to 'Back', ongs_path %>
-
+<br>
+<br>

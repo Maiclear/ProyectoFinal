@@ -17,6 +17,7 @@ gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'sass-rails'
 gem 'mini_magick'
 
+gem 'acts-as-taggable-on', '~> 3.4'
 
 gem 'underscore-rails'
 
