@@ -44,7 +44,7 @@
   Tags:
   <%= raw @event.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
 </p>
-
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
 
 
 <% if can? :create, Comment %>
@@ -61,4 +61,5 @@
 <%= link_to 'Back', events_path(@ong, @event) %>
 <br>
 <br>
+
 

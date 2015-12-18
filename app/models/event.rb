@@ -42,10 +42,10 @@ class Event < ActiveRecord::Base
     if geo = result.first
       obj.address = geo.address
       obj.city = geo.city
-      obj.conutry = geo.country
+      obj.country = geo.country
     end
   end
-  after_validation :geocode, if: ->(obj) {(obj.address.present? && obj.city.present? && obj.country.present?) and (obj.address_changed? && obj.city.changed? && obj.country.changed?)}
+  after_validation :geocode, if: ->(obj) {(obj.address.present? && obj.city.present? && obj.country.present?) and (obj.address_changed? && obj.city_changed? && obj.country_changed?)}
   after_validation :reverse_geocode, if: ->(obj) { (obj.latitude.present? && obj.longitude.present?) and (obj.latitude_changed? || obj.longitude_changed?) }
 
 end
