@@ -11,9 +11,12 @@ class EventsController < ApplicationController
       @events = ong.events
     elsif params[:tag].present?
       @events = Event.tagged_with(params[:tag])
+    elsif params[:search].present?
+      @events = Event.near(params[:search], 50, :order => :distance)
     else
       @events = Event.all
     end
+
   end
 
   # GET /events/1
