@@ -41,10 +41,10 @@
         <td><%= ong.user %></td>
         <td><%= ong.events.count %></td>
         <td><%= link_to 'Show', ong %></td>
-        <% if can? :update, Ong %>
+        <% if can? :update, ong %>
           <td><%= link_to 'Edit', edit_ong_path(ong) %></td>
         <% end %>
-        <% if can? :destroy, Ong %>
+        <% if can? :destroy, ong %>
           <td><%= link_to 'Destroy', ong, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
