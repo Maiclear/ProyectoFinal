@@ -1,0 +1,13 @@
+var handler = Gmaps.build('Google');
+handler.buildMap({
+	provider: {},
+	internal: {
+		id: 'multi_markers'
+	}
+}, function() {
+	var markers = handler.addMarkers(<%= raw @markers.to_json %>);
+	var usermarker = handler.addMarker(<%= raw @usermarker.to_json %>);
+	handler.map.centerOn(usermarker);
+	handler.bounds.extendWith(markers);
+	handler.fitMapToBounds();
+});

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get '/get_map', to: 'locations#get_map'
+
   get 'pages/index'
 
   get 'tags/:tag', to: 'events#index', as: :tag

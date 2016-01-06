@@ -9,13 +9,20 @@ class EventsController < ApplicationController
     if params[:ong_id].present?
       ong = Ong.find(params[:ong_id])
       @events = ong.events
+
+
     elsif params[:tag].present?
       @events = Event.tagged_with(params[:tag])
+
     elsif params[:search].present?
       @events = Event.near(params[:search], 3)
+
     else
       @events = Event.all
+
     end
+
+
 
   end
 
