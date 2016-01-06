@@ -1,4 +1,4 @@
-<h2>EVENTO <%= @event.name %> </h2>
+<h2>EVENTO:  <%= @event.name %> </h2>
 
 <p>
   <strong>Name:</strong>
@@ -17,7 +17,7 @@
 
 <p>
   <strong>Address:</strong>
-  <%= @event.address %>
+  <%= @event.full_address %>
 </p>
 
 <!-- <p>
@@ -37,14 +37,18 @@
 
 <p>
   <strong>Ong:</strong>
-  <%= @event.ong %>
+  <%= link_to "#{@event.ong}", ong_path(@event.ong) %>
 </p>
 
 <p>
   Tags:
   <%= raw @event.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
 </p>
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+<div>
+
+ <h6>Mapa:</h6>
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+  </div>
 <br>
 <% if can? :create, Comment %>
   <%= render partial: "comments/form" , locals: {commentable: @event} %>
@@ -54,7 +58,7 @@
 
 <br>
 <br>
-<% if can? :update, Event %>
+<% if can? :update, @event %>
   <%= link_to 'Edit', edit_ong_event_path(@ong ,@event) %>
 <% end %>
 <%= link_to 'Back', events_path(@ong, @event) %>

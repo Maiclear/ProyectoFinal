@@ -12,7 +12,7 @@ class EventsController < ApplicationController
     elsif params[:tag].present?
       @events = Event.tagged_with(params[:tag])
     elsif params[:search].present?
-      @events = Event.near(params[:search], 50, :order => :distance)
+      @events = Event.near(params[:search], 3)
     else
       @events = Event.all
     end

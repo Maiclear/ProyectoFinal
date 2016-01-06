@@ -25,9 +25,11 @@
 <br>
 <%= render 'event' %>
 <br>
-<% if can? :create, Event %>
+
+<% if @ong.user == current_user %>
   <%= link_to 'CREA UN EVENTO', new_ong_event_path(@ong) %>
-  <br>
+<% end %>
+
 <% if can? :create, Comment %>
   <%= render partial: "comments/form" , locals: {commentable: @ong} %>
 <% end %>
@@ -35,8 +37,7 @@
 
 <br>
 
-<% end %>
-<% if can? :update, Ong %>
+<% if can? :update, @ong %>
   <%= link_to 'Edit', edit_ong_path(@ong) %>
 <% end %>
 <%= link_to 'Back', ongs_path %>
