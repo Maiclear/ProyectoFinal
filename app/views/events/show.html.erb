@@ -50,6 +50,18 @@
   <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
   </div>
 <br>
+ <% if can? :participate, @event %>
+  <p>Participantes: <strong> <%= @event.participations.count %></strong></p>
+  <p>Participación:
+    <% unless @event.participated_by? current_user %>
+      <%= link_to 'Participa', participate_ong_event_path(@ong, @event)  %>
+    <% else %>
+      <%= link_to 'Deja de Participar', participate_ong_event_path(@ong, @event)  %>
+    <% end %>
+  </p>
+<% end %>
+
+<br>
 <% if can? :favorite, @event %>
   <p>Seguidores: <strong> <%= @event.favorites.count %></strong></p>
   <p>Seguir:

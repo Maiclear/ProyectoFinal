@@ -112,6 +112,21 @@ class EventsController < ApplicationController
     end
   end
 
+  def participate
+    @ong = Ong.find(params[:ong_id])
+    @event = Event.find(params[:id])
+    @participate = @event.participations.build(user: current_user)
+
+    if @event.participated_by? current_user
+      @event.remove_participation current_user
+      redirect_to @ong, notice: 'Ya no sigues participando de este evento :('
+    elsif @participate.save
+      redirect_to @ong, notice: 'Gracias por tu participación :D'
+    else
+      redirect_to @ong, notice: 'Tu participación no se ha guardado :('
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event

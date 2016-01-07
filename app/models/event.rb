@@ -32,6 +32,15 @@ class Event < ActiveRecord::Base
     self.user_favorites.include? user
   end
 
+  def remove_participation user
+    self.participations.where(user: user).first.delete
+  end
+
+  def participated_by?(user)
+    self.users.include? user
+  end
+
+
   def remove_comment user
     self.comments.where(user: user).first.delete
   end
@@ -39,6 +48,8 @@ class Event < ActiveRecord::Base
   def commented_by?(user)
     self.user_comments.include? user
   end
+
+
 
   def full_address
     "#{self.address.titleize}, #{self.city.titleize}, #{self.country.titleize}"
