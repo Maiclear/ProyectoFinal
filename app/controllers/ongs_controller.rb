@@ -81,6 +81,18 @@ class OngsController < ApplicationController
   #     format.json { head :no_content }
   #   end
   # end
+  def favorite
+      @favorite = @ong.favorites.build(user: current_user)
+
+      if @ong.favorited_by? current_user
+        @ong.remove_favorite current_user
+        redirect_to @ong, notice: 'Ya no sigues a esta Ong :('
+      elsif @ong.save
+        redirect_to @ong, notice: 'Gracias por tu seguimiento :D'
+      else
+        redirect_to @ong, notice: 'Tu seguimiento no se ha guardado :('
+      end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

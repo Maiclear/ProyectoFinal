@@ -97,6 +97,20 @@ class EventsController < ApplicationController
   #     redirect_to @post, notice: 'Tu like no se ha guardado :('
   #   end
   # end
+  def favorite
+    @ong = Ong.find(params[:ong_id])
+    @event = Event.find(params[:id])
+    @favorite = @event.favorites.build(user: current_user)
+
+    if @event.favorited_by? current_user
+      @event.remove_favorite current_user
+      redirect_to @ong, notice: 'Ya no sigues a este evento :('
+    elsif @favorite.save
+      redirect_to @ong, notice: 'Gracias por tu seguimiento :D'
+    else
+      redirect_to @ong, notice: 'Tu seguimiento no se ha guardado :('
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

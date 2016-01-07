@@ -18,6 +18,14 @@ class Ong < ActiveRecord::Base
   validates :description, presence:true
   validates :mail, presence:true
 
+  def remove_favorite user
+    self.favorites.where(user: user).first.delete
+  end
+
+  def favorited_by?(user)
+    self.user_favorites.include? user
+  end
+
   def to_s
     "#{self.name}"
   end

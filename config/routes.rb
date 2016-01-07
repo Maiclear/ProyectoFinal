@@ -14,11 +14,23 @@ Rails.application.routes.draw do
 
   resources :events , only: [:index, :show ] do
     resources :comments, only: [:create, :destroy], module: :events
+
+    member do
+      get 'favorite'
+    end
   end
 
   resources :ongs do
     resources :comments, only: [:create, :destroy], module: :ongs
-    resources :events
+    resources :events do
+      member do
+        get 'favorite'
+      end
+    end
+
+    member do
+        get 'favorite'
+    end
   end
 
   # resources :tags, only: [:index, :show]

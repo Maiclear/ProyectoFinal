@@ -24,6 +24,13 @@ class Event < ActiveRecord::Base
   validates :city, presence:true
   validates :country, presence:true
 
+  def remove_favorite user
+    self.favorites.where(user: user).first.delete
+  end
+
+  def favorited_by?(user)
+    self.user_favorites.include? user
+  end
 
   def remove_comment user
     self.comments.where(user: user).first.delete

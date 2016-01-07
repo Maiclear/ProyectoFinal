@@ -1,4 +1,4 @@
-<h2>EVENTO:  <%= @event.name %> </h2>
+<h2>EVENTO: " <%= @event.name %> " </h2>
 
 <p>
   <strong>Name:</strong>
@@ -49,6 +49,17 @@
  <h6>Mapa:</h6>
   <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
   </div>
+<br>
+<% if can? :favorite, @event %>
+  <p>Seguidores: <strong> <%= @event.favorites.count %></strong></p>
+  <p>Seguir:
+    <% unless @event.favorited_by? current_user %>
+      <%= link_to 'Seguir', favorite_ong_event_path(@ong, @event)  %>
+    <% else %>
+      <%= link_to 'Dejar de Seguir', favorite_ong_event_path(@ong, @event)  %>
+    <% end %>
+  </p>
+<% end %>
 <br>
 <% if can? :create, Comment %>
   <%= render partial: "comments/form" , locals: {commentable: @event} %>
