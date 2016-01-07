@@ -57,6 +57,6 @@ class Event < ActiveRecord::Base
 
   geocoded_by :full_address
 
-  after_validation :geocode, if: ->(obj) {(obj.address.present? && obj.city.present? && obj.country.present?) and (obj.address_changed? && obj.city_changed? && obj.country_changed?)}
+  after_validation :geocode, if: ->(obj) {(obj.address.present? && obj.city.present? && obj.country.present?) and (obj.address_changed? || obj.city_changed? || obj.country_changed?)}
 
 end

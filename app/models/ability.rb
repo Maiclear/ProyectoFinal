@@ -6,6 +6,8 @@ class Ability
         user ||= User.new(role: 3) # guest user (not logged in)
         if user.admin?
           can :manage, :all
+          can :favorite, [Ong, Event]
+          can :participate, [Ong, Event]
         elsif user.owner?
           can :read, :all
           can :create, :all

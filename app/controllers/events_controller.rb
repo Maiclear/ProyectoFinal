@@ -104,26 +104,25 @@ class EventsController < ApplicationController
 
     if @event.favorited_by? current_user
       @event.remove_favorite current_user
-      redirect_to @ong, notice: 'Ya no sigues a este evento :('
+      redirect_to @event, notice: 'Ya no sigues a este evento :('
     elsif @favorite.save
-      redirect_to @ong, notice: 'Gracias por tu seguimiento :D'
+      redirect_to @event, notice: 'Gracias por tu seguimiento :D'
     else
-      redirect_to @ong, notice: 'Tu seguimiento no se ha guardado :('
+      redirect_to @event, notice: 'Tu seguimiento no se ha guardado :('
     end
   end
 
   def participate
-    @ong = Ong.find(params[:ong_id])
     @event = Event.find(params[:id])
     @participate = @event.participations.build(user: current_user)
 
     if @event.participated_by? current_user
       @event.remove_participation current_user
-      redirect_to @ong, notice: 'Ya no sigues participando de este evento :('
+      redirect_to @event, notice: 'Ya no sigues participando de este evento :('
     elsif @participate.save
-      redirect_to @ong, notice: 'Gracias por tu participación :D'
+      redirect_to @event, notice: 'Gracias por tu participación :D'
     else
-      redirect_to @ong, notice: 'Tu participación no se ha guardado :('
+      redirect_to @event, notice: 'Tu participación no se ha guardado :('
     end
   end
 

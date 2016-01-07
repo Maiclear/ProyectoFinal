@@ -17,11 +17,9 @@ Rails.application.routes.draw do
 
     member do
       get 'favorite'
-    end
-
-    member do
       get 'participate'
     end
+
   end
 
   resources :ongs do
@@ -29,9 +27,6 @@ Rails.application.routes.draw do
     resources :events do
       member do
         get 'favorite'
-      end
-
-      member do
         get 'participate'
       end
     end
