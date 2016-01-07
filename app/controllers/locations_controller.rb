@@ -20,9 +20,11 @@ class LocationsController < ApplicationController
         lat: ulat,
         lng: ulng,
         picture: {
-            "icon": "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-
-         }
+          url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|39B1A4|39B1A4",
+          :width   => 40,
+          :height  => 40,
+         },
+         title: :"Yo",
       }
     else
       @events = Event.all
@@ -35,6 +37,12 @@ class LocationsController < ApplicationController
       @usermarker = {
           lat:-33.471983,
           lng:-70.628265,
+                  picture: {
+          url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|39B1A4|39B1A4",
+          :width   => 40,
+          :height  => 40,
+         },
+         title: :"Yo",
         }
 
 
