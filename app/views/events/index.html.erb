@@ -1,7 +1,7 @@
 
 
 <div id="tag_cloud">
-  <h5>Filtra por Tags:</h5>
+  <h5><span class="icon-tag" aria-hidden="true"></span>Filtra por Tags:</h5>
   <% tag_cloud Event.tag_counts, %w[s m l] do |tag, css_class| %>
     <span class="label label-info border-radius"><%= link_to tag.name, tag_path(tag.name), class: css_class %></span>
   <% end %>

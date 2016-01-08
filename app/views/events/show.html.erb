@@ -1,91 +1,102 @@
-<h2>EVENTO: " <%= @event.name %> " </h2>
+<div class="card">
+  <div class="card-header">
+    <h2>EVENTO: " <%= @event.name %> " </h2>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @event.day %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @event.full_address %>
-</p>
-
-<!-- <p>
-  <strong>Longitude:</strong>
-  <%#= @event.longitude %>
-</p>
-
-<p>
-  <strong>Latitude:</strong>
-  <%#= @event.latitude %>
-</p> -->
-
-<p>
-  <strong>Cupos:</strong>
-  <%= @event.spot %>
-</p>
-
-<p>
-  <strong>Ong:</strong>
-  <%= link_to "#{@event.ong}", ong_path(@event.ong) %>
-</p>
-
-<p>
-  Tags:
-  <%= raw @event.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
-</p>
-<div>
-
- <h6>Mapa:</h6>
-  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+    <p class="card-subtitle text-muted">
+      <strong>Nombre:</strong>
+      <%= @event.name %>
+    </p>
   </div>
-<br>
- <% if can? :participate, @event %>
-  <p>Participantes: <strong> <%= @event.participations.count %></strong></p>
-  <p>Participación:
-    <% unless @event.participated_by? current_user %>
-      <%= link_to 'Participa', participate_ong_event_path(@ong,@event)  %>
-    <% else %>
-      <%= link_to 'Deja de Participar', participate_ong_event_path(@ong,@event)  %>
+  <div class="card-block">
+    <p class="card-text">
+      <strong>Description:</strong>
+      <%= @event.description %>
+    </p>
+
+    <p>
+      <strong>Date:</strong>
+      <%= @event.day %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @event.full_address %>
+    </p>
+
+      <p>
+        <strong>Cupos:</strong>
+        <%= @event.spot %>
+      </p>
+
+      <p>
+        <strong>Ong:</strong>
+        <%= link_to "#{@event.ong}", ong_path(@event.ong) %>
+      </p>
+
+    <p>
+    <span class="icon-tag" aria-hidden="true"></span>
+      Tags:
+      <%= raw @event.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+    </p>
+
+
+
+   <h6>Mapa:</h6>
+    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+  </div>
+  <br>
+  <div class="card-footer clearfix">
+    <div "pull-md-left clearfix">
+     <% if can? :participate, @event %>
+        <p>Participantes: <strong> <%= @event.participations.count %></strong></p>
+        <p>Participación:
+          <% unless @event.participated_by? current_user %>
+            <%= link_to 'Participa', participate_ong_event_path(@ong,@event)  %>
+          <% else %>
+            <%= link_to 'Deja de Participar', participate_ong_event_path(@ong,@event)  %>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+    <br>
+    <div "pull-md-right clearfix">
+      <% if can? :favorite, @event %>
+        <p>Seguidores: <strong> <%= @event.favorites.count %></strong></p>
+        <p>Seguir:
+          <% unless @event.favorited_by? current_user %>
+            <%= link_to favorite_ong_event_path(@ong, @event), class: 'seguir' do  %>
+             Seguir
+             <% end %>
+          <% else %>
+            <%= link_to favorite_ong_event_path(@ong, @event), class: 'seguir' do %>
+              Dejar de Seguir
+             <% end %>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+  <br>
+  <br>
+  <% if can? :update, @event %>
+    <%= link_to edit_ong_event_path(@ong ,@event), class: 'btn btn-success-outline btn-sm' do %>
+      <span class="icon-pencil" aria-hidden="true"></span>
+      Editar
     <% end %>
-  </p>
-<% end %>
-
-<br>
-<% if can? :favorite, @event %>
-  <p>Seguidores: <strong> <%= @event.favorites.count %></strong></p>
-  <p>Seguir:
-    <% unless @event.favorited_by? current_user %>
-      <%= link_to 'Seguir', favorite_ong_event_path(@ong, @event)  %>
-    <% else %>
-      <%= link_to 'Dejar de Seguir', favorite_ong_event_path(@ong, @event)  %>
+  <% end %>
+  <%= link_to events_path(@ong, @event), class: 'btn btn-success-outline btn-sm' do %>
+    <span class="icon-back" aria-hidden="true"></span>
+    Volver
     <% end %>
-  </p>
-<% end %>
-<br>
-<% if can? :create, Comment %>
-  <%= render partial: "comments/form" , locals: {commentable: @event} %>
-<% end %>
+  <br>
+  <br>
+  <% if can? :create, Comment %>
+    <%= render partial: "comments/form" , locals: {commentable: @event} %>
+  <% end %>
 
-<%= render partial: "comments/comments" , locals: {commentable: @event} %>
+  <%= render partial: "comments/comments" , locals: {commentable: @event} %>
 
-<br>
-<br>
-<% if can? :update, @event %>
-  <%= link_to 'Edit', edit_ong_event_path(@ong ,@event) %>
-<% end %>
-<%= link_to 'Back', events_path(@ong, @event) %>
-<br>
-<br>
+
 
 
