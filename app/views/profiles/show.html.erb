@@ -1,21 +1,25 @@
-
-<p>
-  <%= image_tag @user.avatar, width: '200px' %>
-</p>
-<p>
-  <strong>Nombre:</strong>
-  <%= @user.name %>
-</p>
-<p>
-  <strong>Apellido:</strong>
-  <%= @user.lastname %>
-</p>
-<p>
-  <strong>Mail:</strong>
-  <%= @user.email %>
-</p>
-<br>
-
+<div class="row">
+  <div class="col-md-12">
+    <div class=" card">
+			<p>
+			  <%= image_tag @user.avatar, width: '200px' %>
+			</p>
+			<p>
+			  <strong>Nombre:</strong>
+			  <%= @user.name %>
+			</p>
+			<p>
+			  <strong>Apellido:</strong>
+			  <%= @user.lastname %>
+			</p>
+			<p>
+			  <strong>Mail:</strong>
+			  <%= @user.email %>
+			</p>
+			<br>
+    </div>
+  </div>
+</div>
 <% if can? :create, Ong %>
 	<%= render 'ong' %>
   <%= link_to 'CREA UNA ONG', new_ong_path %>

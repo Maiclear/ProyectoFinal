@@ -1,5 +1,5 @@
 <%= form_for [commentable, Comment.new] do |f| %>
-	<p> <h2>  <%= f.label :content, "Deja tu comentario:"  %></h2></p>
+	<p> <h2> <span class="icon-comment" aria-hidden="true"></span> <%= f.label :content, "Deja tu comentario:"  %></h2></p>
 	<%= f.text_area :content %>
 	<br>
 	<p><%= submit_tag('Enviar', class: 'btn btn-submit-outline btn-sm')   %></p>

@@ -1,41 +1,69 @@
-<h2>ONG: " <%= @ong.name %> " </h2>
-<p>
-  <%= image_tag @ong.image, width: '150px'%>
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class=" card">
+          <div class="card-header">
+            <h2 class="card-title display-4">ONG: " <%= @ong.name %> " </h2>
+            <p class="card-subtitle text-muted">
+              <strong>Nombre:</strong>
+              <%= @ong.name %>
+            </p>
+          </div>
+        <%= image_tag(@ong.image, width: '300px', class: 'img-rounded card-img-top img-responsive') if @ong.image?%>
+          <div class="card-block">
+              <p class="card-text">
+                <strong>Descripción:</strong>
+                <%= @ong.description %>
+              </p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @ong.name %>
-</p>
+              <p class="card-text">
+                <strong><span class="icon-mail" aria-hidden="true"></span>: </strong>
+                <%= @ong.mail %>
+              </p>
 
-<p>
-  <strong>Descripción:</strong>
-  <%= @ong.description %>
-</p>
+              <p class="card-text">
+                <strong><span class="icon-user" aria-hidden="true"></span>:</strong>
+                <%= @ong.user %>
+              </p>
+              <br>
 
-<p>
-  <strong>Mail:</strong>
-  <%= @ong.mail %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @ong.user %>
-</p>
+              <% if can? :favorite, @ong %>
+                <p>Seguidores: <strong> <%= @ong.favorites.count %></strong></p>
+                <p>
+                  <% unless @ong.favorited_by? current_user  %>
+                    <%= link_to favorite_ong_path(@ong), class: 'btn btn-info-outline btn-sm' do  %>
+                    <span class="icon-eye" aria-hidden="true"></span>
+                     Seguir
+                     <% end %>
+                  <% else %>
+                    <%= link_to favorite_ong_path(@ong),  class: 'btn btn-info-outline btn-sm' do  %>
+                    <span class="icon-eye" aria-hidden="true"></span>
+                     Dejar de Seguir
+                    <% end %>
+                  <% end %>
+                </p>
+              <% end %>
+              <br>
+        </div>
+    </div>
+  </div>
+</div>
 <br>
-<%= render 'event' %>
-<br>
-
-<% if can? :favorite, @ong %>
-  <p>Seguidores: <strong> <%= @ong.favorites.count %></strong></p>
-  <p>Seguir:
-    <% unless @ong.favorited_by? current_user  %>
-      <%= link_to 'Seguir', favorite_ong_path(@ong) %>
-    <% else %>
-      <%= link_to 'Dejar de Seguir', favorite_ong_path(@ong)  %>
+<% if can? :update, @ong %>
+  <%= link_to edit_ong_path(@ong), class: 'btn btn-success-outline btn-sm' do %>
+      <span class="icon-pencil" aria-hidden="true"></span>
+      Editar
     <% end %>
-  </p>
 <% end %>
+
+<%= link_to ongs_path,  class: 'btn btn-success-outline btn-sm' do %>
+    <span class="icon-back" aria-hidden="true"></span>
+    Volver
+    <% end %>
+<br>
+<br>
+
+
+<%= render 'event' %>
 <br>
 <% if @ong.user == current_user %>
   <%= link_to 'CREA UN EVENTO', new_ong_event_path(@ong) %>
@@ -48,9 +76,4 @@
 
 <br>
 
-<% if can? :update, @ong %>
-  <%= link_to 'Edit', edit_ong_path(@ong) %>
-<% end %>
-<%= link_to 'Back', ongs_path %>
-<br>
-<br>
+

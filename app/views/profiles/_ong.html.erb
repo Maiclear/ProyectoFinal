@@ -24,12 +24,21 @@
         <td><%= ong.description %></td>
         <td><%= ong.mail %></td>
         <td><%= ong.user %></td>
-        <td><%= link_to 'Show', ong %></td>
+        <td><%= link_to  ong , class: 'show' do %>
+            <span class="icon-eye" aria-hidden="true"></span>
+            <% end %>
+        </td>
         <% if can? :update, Ong %>
-          <td><%= link_to 'Edit', edit_ong_path(ong) %></td>
+          <td><%= link_to edit_ong_path(ong), class: 'edit' do %>
+            <span class="icon-cog" aria-hidden="true"></span>
+            <% end %>
+        </td>
         <% end %>
         <% if can? :destroy, Ong %>
-          <td><%= link_to 'Destroy', ong, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to ong, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <span class="icon-trash" aria-hidden="true"></span>
+            <% end %>
+        </td>
         <% end %>
       </tr>
     <% end %>

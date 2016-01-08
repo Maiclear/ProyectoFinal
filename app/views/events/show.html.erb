@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <h2>EVENTO: " <%= @event.name %> " </h2>
+    <h2 class="card-title display-4">EVENTO: " <%= @event.name %> " </h2>
 
     <p class="card-subtitle text-muted">
       <strong>Nombre:</strong>
@@ -34,26 +34,31 @@
       </p>
 
     <p>
-    <span class="icon-tag" aria-hidden="true"></span>
-      Tags:
+    <span class="icon-tag" aria-hidden="true"></span>:
       <%= raw @event.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
     </p>
 
 
 
-   <h6>Mapa:</h6>
+   <h6><span class="icon-location" aria-hidden="true"></span>Mapa:</h6>
     <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
-  </div>
   <br>
-  <div class="card-footer clearfix">
+  <br>
+  <div class=" clearfix">
     <div "pull-md-left clearfix">
      <% if can? :participate, @event %>
         <p>Participantes: <strong> <%= @event.participations.count %></strong></p>
-        <p>Participación:
+        <p>
           <% unless @event.participated_by? current_user %>
-            <%= link_to 'Participa', participate_ong_event_path(@ong,@event)  %>
+            <%= link_to participate_ong_event_path(@ong,@event), class: 'btn btn-info-outline btn-sm' do  %>
+            <span class="icon-heart-empty" aria-hidden="true"></span>
+              Participa
+              <% end %>
           <% else %>
-            <%= link_to 'Deja de Participar', participate_ong_event_path(@ong,@event)  %>
+            <%= link_to participate_ong_event_path(@ong,@event), class: 'btn btn-info-outline btn-sm' do  %>
+            <span class="icon-heart-empty" aria-hidden="true"></span>
+            Deja de Participar
+            <% end %>
           <% end %>
         </p>
       <% end %>
@@ -62,18 +67,21 @@
     <div "pull-md-right clearfix">
       <% if can? :favorite, @event %>
         <p>Seguidores: <strong> <%= @event.favorites.count %></strong></p>
-        <p>Seguir:
+        <p>
           <% unless @event.favorited_by? current_user %>
-            <%= link_to favorite_ong_event_path(@ong, @event), class: 'seguir' do  %>
+            <%= link_to favorite_ong_event_path(@ong, @event), class: 'btn btn-info-outline btn-sm' do  %>
+            <span class="icon-eye" aria-hidden="true"></span>
              Seguir
              <% end %>
           <% else %>
-            <%= link_to favorite_ong_event_path(@ong, @event), class: 'seguir' do %>
+            <%= link_to favorite_ong_event_path(@ong, @event), class: 'btn btn-info-outline btn-sm' do %>
+            <span class="icon-eye" aria-hidden="true"></span>
               Dejar de Seguir
              <% end %>
           <% end %>
         </p>
       <% end %>
+      </div>
     </div>
   </div>
 </div>

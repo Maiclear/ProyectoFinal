@@ -4,12 +4,17 @@
 	<hr>
 	<p><small><%= time_ago_in_words comment.created_at  %></small></p>
 	<p><%= comment.content  %></p>
-	<p><small>Creado por: <%= comment.user %></small></p>
+	<p><small><span class="icon-user" aria-hidden="true"></span> Creado por: <%= comment.user %></small></p>
 	<% if can? :destroy, comment %>
 		<% if commentable.is_a? Ong %>
-			<p><small><%= link_to 'Borrar Comentario', ong_comment_path(commentable, comment), method: :delete %></small></p>
+			<p><small><%= link_to  ong_comment_path(commentable, comment), method: :delete do %>
+			<span class="icon-trash" aria-hidden="true"></span></small>
+			<% end %>
+			</p>
 		<% elsif commentable.is_a? Event %>
-			<p><small><%= link_to 'Borrar Comentario', event_comment_path(commentable, comment), method: :delete %></small></p>
+			<p><small><%= link_to  event_comment_path(commentable, comment), method: :delete do %>
+			<span class="icon-trash" aria-hidden="true"></span></small>
+			<% end %></small></p>
 		<% end %>
 	<hr>
 	<% end %>

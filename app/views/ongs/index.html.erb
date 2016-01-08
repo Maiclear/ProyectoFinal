@@ -22,7 +22,6 @@
       <th>Name</th>
       <th>Description</th>
       <th>Mail</th>
-      <th>User</th>
       <th>Nº Eventos</th>
       <th colspan="3"></th>
     </tr>
@@ -33,19 +32,27 @@
       <tr>
         <td>
           <%= link_to ong do %>
-            <%= image_tag ong.image, width: '100px' , class: 'img-circle'%>
+            <%= image_tag ong.image, width: '100px' , class: 'img-rounded'%>
             <% end %></td>
         <td><%= link_to "#{ong.name}", ong %></td>
         <td><%= ong.description %></td>
         <td><%= ong.mail %></td>
-        <td><%= ong.user %></td>
         <td><%= ong.events.count %></td>
-        <td><%= link_to 'Show', ong %></td>
+        <td><%= link_to ong , class: 'show' do %>
+            <span class="icon-eye" aria-hidden="true"></span>
+            <% end %>
+        </td>
         <% if can? :update, ong %>
-          <td><%= link_to 'Edit', edit_ong_path(ong) %></td>
+          <td><%= link_to edit_ong_path(ong), class: 'edit' do %>
+            <span class="icon-cog" aria-hidden="true"></span>
+            <% end %>
+          </td>
         <% end %>
         <% if can? :destroy, ong %>
-          <td><%= link_to 'Destroy', ong, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to ong, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <span class="icon-trash" aria-hidden="true"></span>
+            <% end %>
+        </td>
         <% end %>
       </tr>
     <% end %>
