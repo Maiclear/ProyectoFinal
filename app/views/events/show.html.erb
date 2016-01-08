@@ -22,11 +22,17 @@
       <strong>Address:</strong>
       <%= @event.full_address %>
     </p>
+      <% if @event.limited %>
+        <p>
+          <strong>Cupos:</strong>
+          <%= @event.spots_left %>
+        </p>
+        <%else %>
+          <strong>Evento Abierto</strong>
+          <br>
+          <br>
+      <% end %>
 
-      <p>
-        <strong>Cupos:</strong>
-        <%= @event.spot %>
-      </p>
 
       <p>
         <strong>Ong:</strong>

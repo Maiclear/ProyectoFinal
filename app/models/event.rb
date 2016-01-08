@@ -40,6 +40,9 @@ class Event < ActiveRecord::Base
     self.users.include? user
   end
 
+  def spots_left
+    self.spot - self.participations.count
+  end
 
   def remove_comment user
     self.comments.where(user: user).first.delete

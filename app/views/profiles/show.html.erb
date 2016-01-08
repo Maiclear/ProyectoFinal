@@ -1,34 +1,46 @@
 <div class="row">
   <div class="col-md-12">
     <div class=" card">
-			<p>
-			  <%= image_tag @user.avatar, width: '200px' %>
+			<p class="card-header">
+			  <%= image_tag(@user.avatar, width: '200px', class: 'card-img-top img-responsive') if @user.avatar? %>
 			</p>
-			<p>
-			  <strong>Nombre:</strong>
-			  <%= @user.name %>
-			</p>
-			<p>
-			  <strong>Apellido:</strong>
-			  <%= @user.lastname %>
-			</p>
-			<p>
-			  <strong>Mail:</strong>
-			  <%= @user.email %>
-			</p>
-			<br>
+			<div class="card-block">
+				<p>
+				  <span class="icon-user" aria-hidden="true"></span><strong> :</strong>
+				  <%= @user.name %> <%= @user.lastname %>
+				</p>
+
+				<p>
+				  <span class="icon-mail" aria-hidden="true"></span><strong> :</strong>
+				  <%= @user.email %>
+				</p>
+				<br>
+			</div>
     </div>
+
+<br>
+<%= link_to edit_user_registration_path, class: 'btn btn-success-outline btn-sm' do %>
+      <span class="icon-pencil" aria-hidden="true"></span>
+      Editar Perfil
+    <% end %>
+
+
+<%= link_to :back,  class: 'btn btn-success-outline btn-sm' do %>
+    <span class="icon-back" aria-hidden="true"></span>
+    Volver
+    <% end %>
   </div>
 </div>
+<br>
+<br>
+
 <% if can? :create, Ong %>
 	<%= render 'ong' %>
-  <%= link_to 'CREA UNA ONG', new_ong_path %>
+  <%= link_to new_ong_path, class: 'btn btn-info-outline ' do %>
+  Crea ONG
+  <% end %>
 <% end %>
-<br>
-<br>
-<%= link_to "Editar perfil", edit_user_registration_path %>
-<br>
-<%= link_to "Back", :back %>
+
 
 
 <br>

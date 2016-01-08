@@ -64,11 +64,13 @@
 
 
 <%= render 'event' %>
-<br>
-<% if @ong.user == current_user %>
-  <%= link_to 'CREA UN EVENTO', new_ong_event_path(@ong) %>
-<% end %>
 
+<% if @ong.user == current_user %>
+  <%= link_to new_ong_event_path(@ong),  class: 'btn btn-info-outline ' do %>
+  Crea Evento
+  <% end %>
+<% end %>
+<br>
 <% if can? :create, Comment %>
   <%= render partial: "comments/form" , locals: {commentable: @ong} %>
 <% end %>

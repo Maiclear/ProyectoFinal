@@ -117,7 +117,7 @@ class EventsController < ApplicationController
     @participate = @event.participations.build(user: current_user)
 
     if @event.participated_by? current_user
-      @event.remove_participation current_user
+      @event.remove_participation(current_user)
       redirect_to @event, notice: 'Ya no sigues participando de este evento :('
     elsif @participate.save
       redirect_to @event, notice: 'Gracias por tu participación :D'
@@ -134,6 +134,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :day, :address, :longitude, :latitude, :spot, :ong_id, :tag_list, :city, :country)
+      params.require(:event).permit(:name, :description, :day, :address, :longitude, :latitude, :spot, :ong_id, :tag_list, :city, :country, :limited)
     end
 end

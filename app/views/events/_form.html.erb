@@ -43,13 +43,21 @@
     <%#= f.label :latitude %><br>
     <%#= f.text_field :latitude %>
   </div> -->
-  <div class="field">
-    <%= f.label :spot, "Cupos:" %><br>
-    <%= f.number_field :spot %>
+  <br>
+  <div class="field input-group">
+    <%= f.check_box :limited , class: "js-limited" %>
+   <span >: Evento Limitado</span>
   </div>
 
+
   <div class="field">
-    <%= f.label :tag_list, "Tags (Separados por comas)" %><br />
+    <%= f.label :spot, "Cupos:" %><br>
+    <%= f.number_field :spot , class: "js-cupos", disabled: true %>
+  </div>
+
+<br>
+  <div class="field">
+    <%= f.label :tag_list, "Tags (Separados por comas más espacio)" %><br />
     <%= f.text_field :tag_list %>
   </div>
 
